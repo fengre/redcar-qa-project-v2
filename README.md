@@ -1,98 +1,177 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Company Query Tool - Full Stack Application
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A monorepo containing a NestJS backend with Perplexity AI integration and a React frontend for querying company information.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Project Structure
 
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
-
-```bash
-$ npm install
+```
+redcar-qa-project-v2/
+├── backend/                 # NestJS API server
+│   ├── src/
+│   │   ├── app.controller.ts
+│   │   ├── app.service.ts
+│   │   └── app.module.ts
+│   ├── package.json
+│   └── README.md
+├── frontend/               # React single-page application
+│   ├── src/
+│   │   ├── App.tsx
+│   │   ├── index.tsx
+│   │   └── index.css
+│   ├── public/
+│   ├── package.json
+│   └── README.md
+├── package.json           # Root package.json for monorepo scripts
+└── README.md             # This file
 ```
 
-## Compile and run the project
+## Features
+
+- **Backend**: NestJS API with Perplexity AI integration
+- **Frontend**: Modern React app with beautiful UI
+- **Monorepo**: Easy management of both frontend and backend
+- **Proxy**: Frontend automatically proxies API calls to backend
+
+## Quick Start
+
+### 1. Install Dependencies
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+# Install all dependencies for both frontend and backend
+npm run install:all
 ```
 
-## Run tests
+### 2. Set Up Environment Variables
+
+Create a `.env` file in the `backend/` directory:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+cd backend
+echo PERPLEXITY_API_KEY=your_api_key_here > .env
 ```
+
+**Get your Perplexity API key:**
+- Sign up at https://www.perplexity.ai/
+- Navigate to your API settings
+- Copy your API key
+
+### 3. Run the Application
+
+#### Option A: Run Both Together (Recommended)
+```bash
+npm run dev
+```
+
+#### Option B: Run Separately
+```bash
+# Terminal 1 - Backend (port 3000)
+npm run backend
+
+# Terminal 2 - Frontend (port 3001)
+npm run frontend
+```
+
+### 4. Access the Application
+
+- **Frontend**: http://localhost:3001
+- **Backend API**: http://localhost:3000
+
+## Usage
+
+1. Open http://localhost:3001 in your browser
+2. Enter a company domain (e.g., "google.com", "microsoft.com")
+3. Ask a question about the company
+4. Click "Submit Query" to get AI-powered analysis
+
+## Example Queries
+
+- "What does this company do?"
+- "Who is the CEO?"
+- "What are their main products?"
+- "What is their revenue?"
+- "How many employees do they have?"
+
+## Development
+
+### Backend Development
+```bash
+cd backend
+npm run start:dev    # Development mode with hot reload
+npm run build        # Build for production
+npm test            # Run tests
+```
+
+### Frontend Development
+```bash
+cd frontend
+npm start           # Development server
+npm run build       # Build for production
+npm test           # Run tests
+```
+
+### Monorepo Scripts
+```bash
+npm run dev         # Run both frontend and backend
+npm run build       # Build both applications
+npm run test        # Run tests for both applications
+```
+
+## API Endpoints
+
+- `POST /query` - Submit a query to Perplexity AI
+  - Body: `{ "query": "your question here" }`
+  - Response: `{ "result": "AI response" }`
+
+## Technologies Used
+
+### Backend
+- **NestJS**: Modern Node.js framework
+- **TypeScript**: Type-safe JavaScript
+- **Perplexity AI**: AI-powered company analysis
+- **Axios**: HTTP client for API calls
+
+### Frontend
+- **React 18**: Modern React with hooks
+- **TypeScript**: Type-safe JavaScript
+- **CSS3**: Modern styling with gradients and animations
+- **Fetch API**: HTTP requests to backend
 
 ## Deployment
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+### Backend Deployment
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+cd backend
+npm run build
+npm run start:prod
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### Frontend Deployment
+```bash
+cd frontend
+npm run build
+# Deploy the build/ folder to your hosting service
+```
 
-## Resources
+## Troubleshooting
 
-Check out a few resources that may come in handy when working with NestJS:
+### Common Issues
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+1. **"Perplexity API key not configured"**
+   - Make sure you've set the `PERPLEXITY_API_KEY` environment variable
+   - Check that the `.env` file is in the `backend/` directory
 
-## Support
+2. **Frontend can't connect to backend**
+   - Ensure the backend is running on port 3000
+   - Check that the proxy configuration in `frontend/package.json` is correct
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+3. **Port conflicts**
+   - Backend runs on port 3000
+   - Frontend runs on port 3001
+   - Make sure these ports are available
 
-## Stay in touch
+### Getting Help
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- Check the console for error messages
+- Verify all dependencies are installed
+- Ensure environment variables are set correctly
+- Check that both services are running on the correct ports
